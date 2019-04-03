@@ -16,6 +16,9 @@ Vue.prototype.axios=axios
 import qs from 'qs'
 //添加到示例对象中
 Vue.prototype.qs=qs
+import {Swipe,SwipeItem} from "mint-ui"
+Vue.component(Swipe.name,Swipe)
+Vue.component(SwipeItem.name,SwipeItem)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
