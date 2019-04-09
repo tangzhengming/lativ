@@ -12,14 +12,14 @@
         </div>
         <div class="message"><img src="../../../lativ-node/public/img/index/icon_message.svg" id="message"><span>消息</span></div>
     </div>
-    <div class="bar">
-        <router-link to="" class="active">首页</router-link>
-        <router-link to="">限时特惠</router-link>
-        <router-link to="">女装</router-link>
-        <router-link to="">男装</router-link>
-        <router-link to="">童装 </router-link>
-        <router-link to="">婴儿装</router-link>
-        <router-link to="">运动</router-link>
+    <div class="bar" >
+        <router-link to="" class="active" @click.native="classitem">首页</router-link>
+        <router-link to="" @click.native="classitem">限时特惠</router-link>
+        <router-link to="" @click.native="classitem">女装</router-link>
+        <router-link to="" @click.native="classitem">男装</router-link>
+        <router-link to="" @click.native="classitem">童装 </router-link>
+        <router-link to="" @click.native="classitem">婴儿装</router-link>
+        <router-link to="" @click.native="classitem">运动</router-link>
     </div>
     <mt-swipe>
         <mt-swipe-item v-for="item of rows" :key="item.id">
@@ -72,6 +72,13 @@ export default {
       }
   },
   methods:{
+      classitem(e){
+          var bar = e.currentTarget.parentElement.children;
+          for(var i = 0;i<bar.length;i++){
+              bar[i].className = "";
+          }
+          e.target.className="active";
+      },
       swipt(){
           var url="http://127.0.0.1:3000/Swipt"
           this.axios.get(url).then(result=>{
