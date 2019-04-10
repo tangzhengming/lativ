@@ -1,25 +1,29 @@
 <template>
    <div>
-    <div class="header">
-        <div>
-            <img src="../../../lativ-node/public/img/index/icon_logo.svg" id="lativ">
+    <div style="height:88px;">
+    <div class="tou">
+        <div class="header">
+            <div>
+                <img src="../../../lativ-node/public/img/index/icon_logo.svg" id="lativ">
+            </div>
+            <div class="input">
+                <router-link to="">
+                    <img src="../../../lativ-node/public/img/index/sousuo.png" class="sousuo">
+                    <input placeholder="输入关键字">
+                </router-link>
+            </div>
+            <div class="message"><img src="../../../lativ-node/public/img/index/icon_message.svg" id="message"><span>消息</span></div>
         </div>
-        <div class="input">
-            <router-link to="">
-                <img src="../../../lativ-node/public/img/index/sousuo.png" class="sousuo">
-                <input placeholder="输入关键字">
-            </router-link>
+        <div class="bar" >
+            <router-link to="" class="active" @click.native="classitem">首页</router-link>
+            <router-link to="" @click.native="classitem">限时特惠</router-link>
+            <router-link to="" @click.native="classitem">女装</router-link>
+            <router-link to="" @click.native="classitem">男装</router-link>
+            <router-link to="" @click.native="classitem">童装 </router-link>
+            <router-link to="" @click.native="classitem">婴儿装</router-link>
+            <router-link to="" @click.native="classitem">运动</router-link>
         </div>
-        <div class="message"><img src="../../../lativ-node/public/img/index/icon_message.svg" id="message"><span>消息</span></div>
     </div>
-    <div class="bar" >
-        <router-link to="" class="active" @click.native="classitem">首页</router-link>
-        <router-link to="" @click.native="classitem">限时特惠</router-link>
-        <router-link to="" @click.native="classitem">女装</router-link>
-        <router-link to="" @click.native="classitem">男装</router-link>
-        <router-link to="" @click.native="classitem">童装 </router-link>
-        <router-link to="" @click.native="classitem">婴儿装</router-link>
-        <router-link to="" @click.native="classitem">运动</router-link>
     </div>
     <mt-swipe>
         <mt-swipe-item v-for="item of rows" :key="item.id">
@@ -43,28 +47,13 @@
             </li>
         </ul>
     </div>
-    <nav class="mui-bar mui-bar-tab">
-        <a class="mui-tab-item mui-active" href="#tabbar">
-            <span class="mui-icon mui-icon-home"></span>
-            <span class="mui-tab-label">首页</span>
-        </a>
-        <a class="mui-tab-item" href="#tabbar-with-chat">
-            <span class="mui-icon mui-icon mui-icon-bars"></span>
-            <span class="mui-tab-label">分类</span>
-        </a>
-        <a class="mui-tab-item" href="#tabbar-with-contact">
-            <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
-            <span class="mui-tab-label">购物车</span>
-        </a>
-        <a class="mui-tab-item" href="#tabbar-with-map">
-            <span class="mui-icon mui-icon-person"></span>
-            <span class="mui-tab-label">个人</span>
-        </a>
-    </nav>
+    <tabbr></tabbr>
   </div> 
 </template>
 <script>
+import tabbr from './nav.vue';
 export default {
+  components:{tabbr},
   data(){
       return{
           rows:[],
@@ -99,8 +88,13 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 *{padding:0;margin:0;list-style: none}
+.tou{
+    width:100%;
+    position:fixed;
+    z-index:10;
+}
 .header{
     width:100%;
     height:54px;
@@ -141,10 +135,10 @@ input{
 }
 .sousuo{
     position:absolute;
-    left:5%;
-    top:2%;
+    left:6%;
+    top:23%;
     width:26px;
-    height:90%;
+    height:60%;
 }
 .bar::-webkit-scrollbar {display:none}
 .bar{
@@ -198,5 +192,4 @@ input{
 .detail img{
     width:100%;
 }
-
 </style>

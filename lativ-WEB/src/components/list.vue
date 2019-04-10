@@ -15,60 +15,87 @@
                 <router-link to="" class="goods">新品热销</router-link>
             </div>
             <ul class="xia">
-                <li class="active">上身类</li>
-                <li>衬衫类</li>
-                <li>针织衫</li>
-                <li>外套类</li>
-                <li>裤&裙装</li>
-                <li>家居&内衣</li>
-                <li>配件</li>
+                <li :class="index==active?'active':''" v-for="(item,index) of classify" :key="index" @click="getClass($event,index)" :data-index="index">{{item}}</li>
             </ul>
         </div>
         <div class="right">
             <div>
-                <img src="../../../lativ-node/public/img/woman-top/41254_W1_190131_TW.jpg" class="banner">
+                <img :src="big" class="banner">
                 <ul>
-                    <li>
+                    <li  v-for="(item,index) of img" :key="index" >
                         <router-link to="">
-                            <img  src="../../../lativ-node/public/img/woman-top/1.jpg" >
-                            <span>印花短T</span>
-                        </router-link>
-                    </li>
-                     <li>
-                        <router-link to="">
-                            <img  src="../../../lativ-node/public/img/woman-top/2.jpg" >
-                            <span>印花短T</span>
-                        </router-link>
-                    </li>
-                     <li>
-                        <router-link to="">
-                            <img  src="../../../lativ-node/public/img/woman-top/3.jpg" >
-                            <span>印花短T</span>
+                            <img  :src="item" >
+                            <span>{{show[index]}}</span>
                         </router-link>
                     </li>
                 </ul>
             </div>
         </div>
+        <tabbr></tabbr>
     </div>
 </template>
 <script>
+import tabbr from './nav.vue'
 export default {
+    components:{tabbr},
     data(){
         return{
-            npList:["女装","男装","童装","婴儿装","运动"], 
+            npList:["女装","男装","童装","婴幼儿","运动"], 
+            active:0,
             action:0,
             stage:'',
+            classify:[],
+            img:"",
+            big:'',
+            show:'',
+            list:""
         }
     },
     methods:{
         getSname(e,index){
+            this.active = 0;
+            this.classify = [];
             this.action = index;
             this.stage = e.target.innerHTML;
+            var url="http://127.0.0.1:3000/classList?title="+this.stage
+            this.axios.get(url).then(result=>{
+                for(var res of result.data){
+                    this.classify.push(res.classify)
+                }
+                this.big = result.data[0].big;
+                this.img = result.data[0].img.split(",");
+                this.show = result.data[0].imgshow.split(",");
+            })
+        },
+        getList(){
+            var url="http://127.0.0.1:3000/classList"
+            this.axios.get(url).then(result=>{
+                this.list=result.data;
+                for(var res of result.data){
+                    this.classify.push(res.classify)
+                }
+                this.big = result.data[0].big;
+                this.img = result.data[0].img.split(",");
+                this.show = result.data[0].imgshow.split(",");
+            })
+        },
+        getClass(e,index){
+            var i = e.target.dataset.index;
+            this.img = "";
+            this.show = "";
+            this.big = "";
+            this.active = index;
+            this.img = this.list[i].img.split(",");
+            this.show = this.list[i].imgshow.split(",");
+            this.big = this.list[i].big;
         }
+    },
+    created(){
+        this.getList()
     }
 }
 </script>
-<style lang="">
+<style >
     *{list-style:none;margin:0;padding:0}
     body{background:#fff;}
     .input{
@@ -144,13 +171,16 @@ export default {
         width:100%;
         border-radius:.3rem;
     }
+    .right ul{
+        display:flex;
+        flex-flow: row wrap;
+    }
     .right ul>li img{
         width:60%;
         margin:1.25rem 20% 0;
     }
     .right ul>li{
         width:32%;
-        display:inline-block;
         font-size: .688rem;
         box-sizing: border-box;
     }

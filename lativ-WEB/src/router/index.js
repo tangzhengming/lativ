@@ -7,9 +7,13 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/Home',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: "/",
+      redirect:"/Home"
     },
     {
       path: '/List',

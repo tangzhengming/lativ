@@ -59,3 +59,12 @@ app.get("/index",(req,res)=>{
        res.send(result)
     })
 })
+app.get("/classList",(req,res)=>{
+    var title = req.query.title;
+    if(!title){title="女装"}
+    var sql = "SELECT * FROM list WHERE title = ?";
+    pool.query(sql,[title],(err,result)=>{
+        if(err) throw err;
+        res.send(result);
+    })
+})
