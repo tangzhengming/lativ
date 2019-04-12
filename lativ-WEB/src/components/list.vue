@@ -15,35 +15,36 @@
                 <router-link to="" class="goods">新品热销</router-link>
             </div>
             <ul class="xia">
-                <li :class="index==active?'active':''" v-for="(item,index) of classify" :key="index" @click="getClass($event,index)" :data-index="index">{{item}}</li>
+                <li :class="index==active?'active':''" v-for="(item,index) of classify" :key="index" @click="getClass($event,index)" :data-index="index" :data-class="item">{{item}}</li>
             </ul>
         </div>
         <div class="right">
             <div>
                 <img :src="big" class="banner">
                 <ul>
-                    <li  v-for="(item,index) of img" :key="index" >
-                        <router-link to="">
+                    <li  v-for="(item,index) of img" :key="index" @click.prevent="jump" :data-detail="show[index]" :data-ids="index">
                             <img  :src="item" >
-                            <span>{{show[index]}}</span>
-                        </router-link>
+                            <span>{{show[index]}}</span>    
                     </li>
                 </ul>
             </div>
         </div>
         <tabbr></tabbr>
+        
     </div>
 </template>
 <script>
 import tabbr from './nav.vue'
 export default {
+    name: 'test-keep-alive',
     components:{tabbr},
     data(){
         return{
             npList:["女装","男装","童装","婴幼儿","运动"], 
             active:0,
             action:0,
-            stage:'',
+            stage:"", //男装女装
+            classs:"", //上衣分类
             classify:[],
             img:"",
             big:'',
@@ -77,10 +78,19 @@ export default {
                 this.big = result.data[0].big;
                 this.img = result.data[0].img.split(",");
                 this.show = result.data[0].imgshow.split(",");
+                this.stage = this.npList[0]
+                this.classs = this.classify[0]
             })
+            /*setTimeout(()=>{
+                
+                console.log(this);
+                console.log(this.classs);
+                console.log(this.classify[0]);
+            },10)  */
         },
         getClass(e,index){
             var i = e.target.dataset.index;
+            this.classs = e.currentTarget.dataset.class;
             this.img = "";
             this.show = "";
             this.big = "";
@@ -88,6 +98,19 @@ export default {
             this.img = this.list[i].img.split(",");
             this.show = this.list[i].imgshow.split(",");
             this.big = this.list[i].big;
+        },
+        jump(e){
+            var ids=e.currentTarget.dataset.ids
+            var detail=e.currentTarget.dataset.detail;
+            this.$router.push({
+                name:"details",
+                params:{
+                    title:this.stage,
+                    shows:this.classs,
+                    detail:detail,
+                    ids:ids
+                }
+            })
         }
     },
     created(){
@@ -98,6 +121,9 @@ export default {
 <style >
     *{list-style:none;margin:0;padding:0}
     body{background:#fff;}
+    li{
+        text-align: center;
+    }
     .input{
         width:100%;
         padding:.75rem .75rem .5rem;
@@ -150,6 +176,7 @@ export default {
     }
     .shang{
         border-bottom:1px solid #f3f3f3;
+        text-align:center;
     }
     .goods:first-child{
         margin:1rem 0 0.625rem;
@@ -186,5 +213,8 @@ export default {
     }
     .right ul>li>a{
         color:#999;
+        width:100%;
+        height:100%;
+        display: inline-block;
     }
 </style>

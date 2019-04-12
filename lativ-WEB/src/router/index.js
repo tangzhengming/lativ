@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld.vue'
 import List from "../components/list.vue"
+import details from "../components/details.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -9,7 +10,7 @@ export default new Router({
     {
       path: '/Home',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
     },
     {
       path: "/",
@@ -18,7 +19,15 @@ export default new Router({
     {
       path: '/List',
       name: 'List',
-      component: List
+      component: List,
+      meta:{
+        KeepAlive:true
+      }
+    },
+    {
+      path: '/details',
+      name: 'details',
+      component:details,
     }
   ]
 })

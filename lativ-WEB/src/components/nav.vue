@@ -29,8 +29,7 @@ export default {
     },
     methods:{
         add(index){
-            this.active = index;   
-            console.log(this.active)  
+            this.active = index;     
         }
     },
 }

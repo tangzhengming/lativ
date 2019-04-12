@@ -68,3 +68,22 @@ app.get("/classList",(req,res)=>{
         res.send(result);
     })
 })
+app.get("/getDetails",(req,res)=>{
+    var title = req.query.title;
+    var shows = req.query.detail;
+    var classify = req.query.shows;
+    var sql = "SELECT * from details WHERE title=? AND classify=? AND shows=?"
+    pool.query(sql,[title,classify,shows],(err,result)=>{
+        if(err) throw err;  
+        res.send(result)
+    })
+})
+app.get("/getShow",(req,res)=>{
+    var title = req.query.title;
+    var classify = req.query.shows;
+    var sql1 = "SELECT imgshow FROM list WHERE title=? AND classify=?";
+        pool.query(sql1,[title,classify],(err,result)=>{
+            if(err) throw err;
+            res.send(result)
+        })
+})
