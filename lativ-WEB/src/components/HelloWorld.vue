@@ -77,7 +77,6 @@ export default {
       index(){
           var url="http://127.0.0.1:3000/index"
           this.axios.get(url).then(result=>{
-              console.log(result.data);
               this.list=result.data
           })
       }

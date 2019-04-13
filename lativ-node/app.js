@@ -87,3 +87,18 @@ app.get("/getShow",(req,res)=>{
             res.send(result)
         })
 })
+app.get("/login",(req,res)=>{
+    var uname = req.query.uname;
+    var puwd = req.query.puwd;
+    var sql="SELECT uid FROM login WHERE uname=? AND puwd=?";
+    pool.query(sql,[uname,puwd],(err,result)=>{
+        if(err)throw err;
+        if(result ==0){
+            res.send({code:-1,msg:"账户名密码错误"})
+        }else{
+            var uid=result[0].id;
+            req.session.uid=uid;
+            res.send({code:1,msg:"登录成功"})
+        }
+    })
+})

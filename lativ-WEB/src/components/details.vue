@@ -5,34 +5,27 @@
                     <router-link to="/list">
                         <img src="../img/jiantou.png" class="back">
                     </router-link>
-                    <span>上衣类</span>
+                    <span>{{shows}}</span>
                     <router-link to="">
                         <img src="../img/geren.png" class="geren">
                     </router-link>
             </div>
-            <ul class="title1">
-                <li class="active">印花短T</li>
-                <li>印花长T</li>
-                <li>短袖背心</li>
-                <li>雪纺轻柔</li>
-                <li>印花短T</li>
-                <li>印花短T</li>
-                <li>印花短T</li>
+            <ul >
+                <div class="title1">
+                <li :class="index == ids?'active':'' " v-for="(item,index) of list" :key="index" @click="getIds(index,$event)" :data-i="item">{{item}}</li>
+                </div>
             </ul>
         </div>
         <div class="bodys">
-            <div>印花短T</div>
+            <div>{{detail}}</div>
             <ul>
-                <li>
-                    <img src="../../../lativ-node/public/img/top-duanT/small.jpg" alt="">
+                <li v-for="(item,index) of details" :key="index" :data-id="item.id">
+                    <img :src="item.smalls" alt="">
                     <ul class="size">
-                        <li>S</li>
-                        <li>M</li>
-                        <li>L</li>
-                        <li>M</li>
+                        <li v-for="(item,index) of size[index]" :key="index">{{item}}</li>
                     </ul>
-                    <div class="btm">迪士尼系列口袋寬版印花T恤-53-女</div>
-                     <div class="price">¥223</div>
+                    <div class="btm">{{item.sname}}</div>
+                     <div class="price">{{item.price.toFixed(2)}}</div>
                 </li>
             </ul>
         </div>
@@ -45,20 +38,44 @@ export default {
             title:this.$route.params.title,
             shows:this.$route.params.shows,
             ids:this.$route.params.ids,
-            detail:this.$route.params.detail
+            detail:this.$route.params.detail,
+            list:[],
+            details:[],
+            size:[],
         }
     },
     methods: {
+        getIds(index,e){
+            var arr = [];
+             this.ids = index;
+             this.detail = e.target.dataset.i;
+             var url="http://127.0.0.1:3000/getDetails?title="+this.title+"&shows="+this.shows+"&detail="+this.detail;
+              this.axios.get(url).then(result=>{
+                for(var data of result.data){
+                    var size = data.size.split(",")
+                    arr.push(size);
+                }
+                this.size = arr;
+                this.details =result.data;
+            })
+        },
         getDetails(){
+            var arr = [];
             var url="http://127.0.0.1:3000/getDetails?title="+this.title+"&shows="+this.shows+"&detail="+this.detail
             this.axios.get(url).then(result=>{
-                console.log(result)
+                for(var data of result.data){
+                    var size = data.size.split(",")
+                    arr.push(size);
+                }
+                this.size = arr;
+                this.details =result.data;
             })
         },
         getshow(){
             var url="http://127.0.0.1:3000/getShow?title="+this.title+"&shows="+this.shows
             this.axios.get(url).then(result=>{
-                console.log(result)
+                var list = result.data[0].imgshow.split(",")
+                this.list = list;
             })
         }
     },

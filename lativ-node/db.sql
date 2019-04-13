@@ -20,7 +20,7 @@ CREATE TABLE details(
   title VARCHAR(8),
   classify  VARCHAR(8),
   shows      VARCHAR(8),
-  smalls     VARCHAR(32),
+  smalls     VARCHAR(64),
   big       VARCHAR(6000),
   sname      VARCHAR(64),
   price      DECIMAL(6,2),

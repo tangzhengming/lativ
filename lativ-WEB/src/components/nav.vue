@@ -9,7 +9,7 @@
             <span class="mui-icon mui-icon mui-icon-bars"  @click="add(2)"></span>
             <span class="mui-tab-label">分类</span>
         </router-link>
-        <router-link class="mui-tab-item" :class="active==3?'mui-active':''" to="/list">
+        <router-link class="mui-tab-item" :class="active==3?'mui-active':''" to="/login">
             <span class="mui-icon mui-icon-extra mui-icon-extra-cart"  @click="add(3)"><span class="mui-badge">0</span></span>
             <span class="mui-tab-label">购物车</span>
         </router-link>
