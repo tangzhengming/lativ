@@ -3,7 +3,6 @@ import App from './App'
 import router from './router'
 import 'mint-ui/lib/style.css'
 Vue.config.productionTip = false
-
 import './lib/mui/css/mui.css'
 import './lib/mui/css/icons-extra.css'
 //配置axios

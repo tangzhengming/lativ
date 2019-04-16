@@ -57,7 +57,7 @@ export default {
   data(){
       return{
           rows:[],
-          list:[]
+          list:[],
       }
   },
   methods:{
@@ -79,12 +79,21 @@ export default {
           this.axios.get(url).then(result=>{
               this.list=result.data
           })
+      },
+       handleScroll(){
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        console.log(scrollTop)
+
       }
   },
   created(){
       this.swipt();
       this.index();
-  }
+  },
+    mounted(){
+      window.addEventListener('scroll',this.handleScroll,true)
+    },
+
 }
 </script>
 <style scoped>

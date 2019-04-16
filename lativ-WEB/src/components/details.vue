@@ -19,7 +19,7 @@
         <div class="bodys">
             <div>{{detail}}</div>
             <ul>
-                <li v-for="(item,index) of details" :key="index" :data-id="item.id">
+                <li v-for="(item,index) of details" :key="index"  @click="info(item.id)">
                     <img :src="item.smalls" alt="">
                     <ul class="size">
                         <li v-for="(item,index) of size[index]" :key="index">{{item}}</li>
@@ -76,6 +76,14 @@ export default {
             this.axios.get(url).then(result=>{
                 var list = result.data[0].imgshow.split(",")
                 this.list = list;
+            })
+        },
+        info(id){
+            this.$router.push({
+                path:"/info",
+                query:{
+                    id:id
+                }
             })
         }
     },
