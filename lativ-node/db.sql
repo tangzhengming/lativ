@@ -25,7 +25,7 @@ CREATE TABLE details(
   sname      VARCHAR(64),
   price      DECIMAL(6,2),
   size       VARCHAR(120),
-  color      VARCHAR(32),
+  color      VARCHAR(64),
   color_title  VARCHAR(8)
 )
   INSERT INTO indexs VALUES(NULL,'http://127.0.0.1:3000/img/index/details1.jpg',NULL);
@@ -98,9 +98,9 @@ CREATE TABLE details(
 INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/1/small.jpg','http://127.0.0.1:3000/img/1/1.jpg,http://127.0.0.1:3000/img/1/2.jpg,http://127.0.0.1:3000/img/1/3.jpg,http://127.0.0.1:3000/img/1/4.jpg,http://127.0.0.1:3000/img/1/5.jpg','迪士尼系列宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/YL.jpg','黄色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/2/small.jpg','http://127.0.0.1:3000/img/2/1.jpg,http://127.0.0.1:3000/img/2/2.jpg,http://127.0.0.1:3000/img/2/3.jpg,http://127.0.0.1:3000/img/2/4.jpg,http://127.0.0.1:3000/img/2/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/HE.jpg','褐色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/3/small.jpg','http://127.0.0.1:3000/img/3/1.jpg,http://127.0.0.1:3000/img/3/2.jpg,http://127.0.0.1:3000/img/3/3.jpg,http://127.0.0.1:3000/img/3/4.jpg,http://127.0.0.1:3000/img/3/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/FG.jpg','复古蓝');
-INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/4/small.jpg','http://127.0.0.1:3000/img/4/1.jpg,http://127.0.0.1:3000/img/4/2.jpg,http://127.0.0.1:3000/img/4/3.jpg,http://127.0.0.1:3000/img/4/4.jpg,http://127.0.0.1:3000/img/4/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/YL','黄色');
+INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/4/small.jpg','http://127.0.0.1:3000/img/4/1.jpg,http://127.0.0.1:3000/img/4/2.jpg,http://127.0.0.1:3000/img/4/3.jpg,http://127.0.0.1:3000/img/4/4.jpg,http://127.0.0.1:3000/img/4/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/YL.jpg','黄色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/5/small.jpg','http://127.0.0.1:3000/img/5/1.jpg,http://127.0.0.1:3000/img/5/2.jpg,http://127.0.0.1:3000/img/5/3.jpg,http://127.0.0.1:3000/img/5/4.jpg,http://127.0.0.1:3000/img/5/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/WH.jpg','白色');
-INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/6/small.jpg','http://127.0.0.1:3000/img/6/1.jpg,http://127.0.0.1:3000/img/6/2.jpg,http://127.0.0.1:3000/img/6/3.jpg,http://127.0.0.1:3000/img/6/4.jpg,http://127.0.0.1:3000/img/6/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/FG','灰色');
+INSERT INTO details VALUES(NULL,'女装','上身类','印花短T','http://127.0.0.1:3000/img/6/small.jpg','http://127.0.0.1:3000/img/6/1.jpg,http://127.0.0.1:3000/img/6/2.jpg,http://127.0.0.1:3000/img/6/3.jpg,http://127.0.0.1:3000/img/6/4.jpg,http://127.0.0.1:3000/img/6/5.jpg','迪士尼系列口袋宽版印花T恤-55-女','233','S,M,L,XL','http://127.0.0.1:3000/img/color/FG.jpg','灰色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花长T','http://127.0.0.1:3000/img/7/small.jpg','http://127.0.0.1:3000/img/7/1.jpg,http://127.0.0.1:3000/img/7/2.jpg,http://127.0.0.1:3000/img/7/3.jpg,http://127.0.0.1:3000/img/7/4.jpg,http://127.0.0.1:3000/img/7/5.jpg','迪士尼系列长袖圆领-女','245','S,M,L,XL','http://127.0.0.1:3000/img/color/WH.jpg','白色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花长T','http://127.0.0.1:3000/img/8/small.jpg','http://127.0.0.1:3000/img/8/1.jpg,http://127.0.0.1:3000/img/8/2.jpg,http://127.0.0.1:3000/img/8/3.jpg,http://127.0.0.1:3000/img/8/4.jpg,http://127.0.0.1:3000/img/8/5.jpg','迪士尼系列长袖圆领-女','245','S,M,L,XL','http://127.0.0.1:3000/img/color/HE.jpg','褐色');
 INSERT INTO details VALUES(NULL,'女装','上身类','印花长T','http://127.0.0.1:3000/img/9/small.jpg','http://127.0.0.1:3000/img/9/1.jpg,http://127.0.0.1:3000/img/9/2.jpg,http://127.0.0.1:3000/img/9/3.jpg,http://127.0.0.1:3000/img/9/4.jpg,http://127.0.0.1:3000/img/9/5.jpg','迪士尼系列长袖圆领-女','245','S,M,L,XL','http://127.0.0.1:3000/img/color/FG.jpg','复古蓝');

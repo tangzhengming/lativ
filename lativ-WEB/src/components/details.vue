@@ -22,7 +22,7 @@
                 <li v-for="(item,index) of details" :key="index"  @click="info(item.id)">
                     <img :src="item.smalls" alt="">
                     <ul class="size">
-                        <li v-for="(item,index) of size[index]" :key="index">{{item}}</li>
+                        <li v-for="(item,index) of size[index]"  :key="index">{{item}}</li>
                     </ul>
                     <div class="btm">{{item.sname}}</div>
                      <div class="price">{{item.price.toFixed(2)}}</div>
@@ -35,10 +35,10 @@
 export default {
     data(){
         return{
-            title:this.$route.params.title,
-            shows:this.$route.params.shows,
-            ids:this.$route.params.ids,
-            detail:this.$route.params.detail,
+            title:this.$route.query.title,
+            shows:this.$route.query.shows,
+            ids:this.$route.query.ids,
+            detail:this.$route.query.detail,
             list:[],
             details:[],
             size:[],
@@ -91,6 +91,17 @@ export default {
         this.getshow()
         this.getDetails()
     },
+    beforeRouteLeave(to,from,next){
+        if(to.name == "List"){
+            from.meta.KeepAlive=false;
+            next()
+        }else if(to.name == "info"){
+            from.meta.KeepAlive=true;
+            next();
+
+        }
+        console.log(from.meta.KeepAlive)
+    }
 }
 </script>
 <style scoped>
@@ -165,11 +176,12 @@ export default {
     margin-top:1.375rem;
     margin-left:.75rem;
     margin-right:.375rem;
+    text-align: center;
 }
+
 .bodys>ul>li>img{
     width:80%;
     display: inline-block;
-    text-align: center;
 }
 .size{
     display:flex;

@@ -1,19 +1,13 @@
 <template>
     <div>
         <mt-swipe :auto="0" :show-indicators="false" >
-            <mt-swipe-item>
-                <img src="../../../lativ-node/public/img/1/1.jpg" >
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <img src="../../../lativ-node/public/img/1/2.jpg" >
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <img src="../../../lativ-node/public/img/1/3.jpg" >
+            <mt-swipe-item v-for="(item,index) of big" :key="index">
+                <img :src="item" >
             </mt-swipe-item>
         </mt-swipe>
         <div class="title">
-            <span>迪士尼系列寬版印花T恤-55-女</span>
-            <span>¥229</span>
+            <span>{{details.sname}}</span>
+            <span>¥{{details.price}}</span>
         </div>
         <div class="grid"></div>
         <div class="other">
@@ -33,7 +27,7 @@
         <div class="grid"></div>
         <div class="assess">商品评价( 0 )</div>
         <div class="button">
-            <router-link to="">
+            <router-link to="/Home">
                 <img src="../img/主页.png" alt="">
             </router-link>
             <router-link to="">
@@ -47,39 +41,36 @@
         </div>
         <div class="app-info"  v-show="isbuy">
             <div class="smallImg">
-                <img src="../../../lativ-node/public/img/1/small.jpg" alt="">
+                <img :src="details.smalls" alt="">
             </div>
             <img src="../img/X.png" class="x" @click="x">
             <div class="info1">
                 <div class="price">
-                    <span>¥223</span>
+                    <span>¥{{details.price}}</span>
                 </div>
                 <div class="ti">熱銷推薦．3件75折起</div>
-                <div class="ti">已選擇：褐色</div>
+                <div class="ti">已選擇：{{details.color_title}}{{"-"+size}}</div>
             </div>
             <div class="color">
                 <div>颜色</div>
-                <div><img src="../../../lativ-node/public/img/color/HE.jpg"></div>
+                <div><img :src="details.color"></div>
             </div>
             <div class="size">
                 <div>尺寸
                     <span>查看材质尺寸</span>
                 </div>
                 <ul>
-                    <li>S</li>
-                    <li>M</li>
-                    <li>L</li>
-                    <li>XL</li>
+                    <li v-for="(item,index) of sizes" :class="item == size?'active':''" :key="index" @click="siz(item)">{{item}} </li>
                 </ul>
             </div>
             <div class="number">
                 购买数量
                 <div class="zone">
-                    <div class="cut">
+                    <div class="cut" @click="jian">
                         <img src="../img/减号.png" >
                     </div>
-                    <div class="num">1</div>
-                    <div class="zengjia">
+                    <div class="num" :v-model="number">{{number}}</div>
+                    <div class="zengjia" @click="jia">
                         <img src="../img/加号.png" >
                     </div>
                 </div>
@@ -91,10 +82,17 @@
     </div>
 </template>
 <script>
+import {Toast} from "mint-ui"
 export default {
     data(){
         return{
-            isbuy:false
+            isbuy:false,
+            id:this.$route.query.id,
+            details:[],
+            big:[],
+            sizes:[],
+            size:"",
+            number:1,
         }
     },
     methods:{
@@ -103,8 +101,41 @@ export default {
         },
         x(){
             this.isbuy=false;
+        },
+        info(){
+            var url="http://127.0.0.1:3000/details?id="+this.id;
+            this.axios.get(url).then(result=>{
+                this.details = result.data[0]
+                console.log(result.data[0])
+                this.big = result.data[0].big.split(",")
+                this.sizes = result.data[0].size.split(",")
+            })
+        },
+        siz(item){
+            this.size = item;
+        },
+        jian(){
+            if(this.size !=""){
+                if(this.number<=1){
+                    Toast("最低不能低于1件")
+                }else{
+                    this.number--;
+                }
+            }else{
+                Toast("请先选择尺码")
+            }
+        },
+        jia(){
+            if(this.size !=""){
+                this.number++;
+            }else{
+                Toast("请先选择尺码")
+            }
         }
-    }
+    },
+    created(){
+        this.info()
+    },
 }
 </script>
 <style scoped>
@@ -285,6 +316,7 @@ export default {
     background: #f6f6f6;
     font-size:.75rem;
     margin: 0 1rem 1rem 0;
+    border-radius: 3px;
 }
 .number{
     height:2.375rem;
@@ -323,5 +355,9 @@ export default {
 }
 .zone div:nth-child(2){
     width:3rem;
+}
+.active{
+    background-color:#4d3126 !important;
+    color:#fff;
 }
 </style>

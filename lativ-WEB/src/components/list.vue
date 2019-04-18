@@ -49,7 +49,7 @@ export default {
             img:"",
             big:'',
             show:'',
-            list:""
+            list:"",
         }
     },
     methods:{
@@ -104,7 +104,7 @@ export default {
             var detail=e.currentTarget.dataset.detail;
             this.$router.push({
                 name:"details",
-                params:{
+                query:{
                     title:this.stage,
                     shows:this.classs,
                     detail:detail,
@@ -118,7 +118,7 @@ export default {
     }
 }
 </script>
-<style >
+<style scoped>
     *{list-style:none;margin:0;padding:0}
     body{background:#fff;}
     li{

@@ -102,3 +102,11 @@ app.get("/login",(req,res)=>{
         }
     })
 })
+app.get("/details",(req,res)=>{
+    var id = req.query.id;
+    var sql = "SELECT * FROM details WHERE id=?";
+    pool.query(sql,[id],(err,result)=>{
+        if(err) throw err;
+        res.send(result)
+    })
+})
